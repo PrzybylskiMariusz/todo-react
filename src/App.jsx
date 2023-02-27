@@ -1,16 +1,29 @@
 import { GlobalStyles } from "./styles/GlobalStyles";
 import { getDate } from "./utils/helpers";
-import { BiTrash } from "react-icons/bi";
+import { useState } from "react";
 import Wrapper from "./components/Wrapper";
 import Heading from "./components/Heading";
 import DateParagraph from "./components/DateParagraph";
 import Input from "./components/Input";
 import List from "./components/List";
-import ListItem from "./components/ListItem";
-import IconWrapper from "./components/IconWrapper";
-import ActionsWrapper from "./components/ActionsWrapper";
 
 function App() {
+	const [tasks, setTasks] = useState([
+		{ id: 1, title: "Fake task from state", done: false },
+		{ id: 2, title: "Fake task from state", done: true },
+	]);
+
+	// const changeTaskStatus = (id) => {
+	// 	setTasks((currentTasks) => {
+	// 		return currentTasks.map((task) => {
+	// 			if (task.id === id) {
+	// 				return { ...task, done: !task.done };
+	// 			}
+	// 			return;
+	// 		});
+	// 	});
+	// };
+
 	return (
 		<>
 			<GlobalStyles />
@@ -22,26 +35,7 @@ function App() {
 				<form>
 					<Input type="text" placeholder="+ Add your new task..." />
 				</form>
-				<List>
-					<ListItem>
-						<p>Fake task</p>
-						<ActionsWrapper>
-							<IconWrapper>
-								<BiTrash />
-							</IconWrapper>
-							<input type="checkbox" />
-						</ActionsWrapper>
-					</ListItem>
-					<ListItem>
-						<p>Fake task</p>
-						<ActionsWrapper>
-							<IconWrapper>
-								<BiTrash />
-							</IconWrapper>
-							<input type="checkbox" />
-						</ActionsWrapper>
-					</ListItem>
-				</List>
+				<List list={tasks} />
 			</Wrapper>
 		</>
 	);
