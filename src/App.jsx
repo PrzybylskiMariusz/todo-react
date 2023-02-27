@@ -2,6 +2,7 @@ import { GlobalStyles } from "./styles/GlobalStyles";
 import Wrapper from "./components/Wrapper";
 import Heading from "./components/Heading";
 import DateParagraph from "./components/DateParagraph";
+import Input from "./components/Input";
 
 function App() {
 	const weekday = new Date().toLocaleDateString("en-US", { weekday: "long" });
@@ -18,7 +19,7 @@ function App() {
 					<DateParagraph currentDate={currentDate} />
 				</header>
 				<form>
-					<input type="text" placeholder="+ Add your new task..." />
+					<Input type="text" placeholder="+ Add your new task..." />
 				</form>
 				<ul>
 					<li>
