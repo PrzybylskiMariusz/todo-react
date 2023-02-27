@@ -1,3 +1,6 @@
+import { GlobalStyles } from "./styles/GlobalStyles";
+import Wrapper from "./components/Wrapper";
+
 function App() {
 	const weekday = new Date().toLocaleDateString("en-US", { weekday: "long" });
 	const numericDay = new Date().toLocaleDateString("en-US", { day: "numeric" });
@@ -6,21 +9,24 @@ function App() {
 
 	return (
 		<>
-			<div>
-				<h1>My Tasks</h1>
-				<p>{currentDate}</p>
-			</div>
-			<form>
-				<input type="text" placeholder="+ Add your new task..." />
-			</form>
-			<ul>
-				<li>
-					<label>
-						<p>Fake task</p>
-						<input type="checkbox" />
-					</label>
-				</li>
-			</ul>
+			<GlobalStyles />
+			<Wrapper>
+				<div>
+					<h1>My Tasks</h1>
+					<p>{currentDate}</p>
+				</div>
+				<form>
+					<input type="text" placeholder="+ Add your new task..." />
+				</form>
+				<ul>
+					<li>
+						<label>
+							<p>Fake task</p>
+							<input type="checkbox" />
+						</label>
+					</li>
+				</ul>
+			</Wrapper>
 		</>
 	);
 }
