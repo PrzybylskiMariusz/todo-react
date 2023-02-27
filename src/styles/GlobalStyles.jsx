@@ -25,5 +25,7 @@ export const GlobalStyles = createGlobalStyle`
         justify-content: center;
         height: 100vh;
         width: 100%;
+        color: #101010;
+        background-color: #F9F9F9;
     }
 `;
