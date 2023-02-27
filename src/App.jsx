@@ -1,32 +1,26 @@
 import { GlobalStyles } from "./styles/GlobalStyles";
+import { getDate } from "./utils/helpers";
 import Wrapper from "./components/Wrapper";
 import Heading from "./components/Heading";
 import DateParagraph from "./components/DateParagraph";
 import Input from "./components/Input";
 
 function App() {
-	const weekday = new Date().toLocaleDateString("en-US", { weekday: "long" });
-	const numericDay = new Date().toLocaleDateString("en-US", { day: "numeric" });
-	const month = new Date().toLocaleDateString("en-US", { month: "long" });
-	const currentDate = `${weekday}, ${numericDay} ${month}`;
-
 	return (
 		<>
 			<GlobalStyles />
 			<Wrapper>
 				<header>
 					<Heading title="My tasks" />
-					<DateParagraph currentDate={currentDate} />
+					<DateParagraph currentDate={getDate()} />
 				</header>
 				<form>
 					<Input type="text" placeholder="+ Add your new task..." />
 				</form>
 				<ul>
 					<li>
-						<label>
-							<p>Fake task</p>
-							<input type="checkbox" />
-						</label>
+						<p>Fake task</p>
+						<input type="checkbox" />
 					</li>
 				</ul>
 			</Wrapper>
