@@ -1,7 +1,7 @@
 import ListItem from "../ListItem";
 import { StyledList } from "./List.styles";
 
-const List = ({ tasks, changeTaskStatus }) => {
+const List = ({ tasks, changeTaskStatus, deleteTask }) => {
 	const renderTasksList = () =>
 		tasks.map((task, index) => (
 			<ListItem
@@ -9,6 +9,7 @@ const List = ({ tasks, changeTaskStatus }) => {
 				task={task}
 				index={index}
 				handleChangeTaskStatus={changeTaskStatus}
+				deleteTask={deleteTask}
 			/>
 		));
 	return <StyledList>{renderTasksList()}</StyledList>;

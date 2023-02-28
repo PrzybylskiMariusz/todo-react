@@ -18,6 +18,27 @@ function App() {
 		setTasks([...tasks]);
 	};
 
+	const addTask = (task) => {
+		setTasks([task, ...tasks]);
+	};
+
+	const deleteTask = (id) => {
+		const filteredTasks = tasks.filter((task) => task.id !== id);
+		setTasks([...filteredTasks]);
+	};
+
+	const [formValue, setFormValue] = useState({
+		id: crypto.randomUUID(),
+		title: "",
+		done: false,
+	});
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		addTask(formValue);
+		setFormValue({ id: crypto.randomUUID(), title: "", done: false });
+	};
+
 	return (
 		<>
 			<GlobalStyles />
@@ -26,10 +47,22 @@ function App() {
 					<Heading title="My tasks" />
 					<DateParagraph currentDate={getDate()} />
 				</header>
-				<form>
-					<Input type="text" placeholder="+ Add your new task..." />
+				<form onSubmit={handleSubmit}>
+					<Input
+						id="test"
+						type="text"
+						placeholder="+ Add your new task..."
+						value={formValue.title}
+						onChange={(e) =>
+							setFormValue({ ...formValue, title: e.target.value })
+						}
+					/>
 				</form>
-				<List tasks={tasks} changeTaskStatus={changeTaskStatus} />
+				<List
+					tasks={tasks}
+					changeTaskStatus={changeTaskStatus}
+					deleteTask={deleteTask}
+				/>
 			</Wrapper>
 		</>
 	);

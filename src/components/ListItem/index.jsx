@@ -8,13 +8,13 @@ const Paragraph = styled.p`
 	text-decoration: ${({ isDone }) => (isDone ? "line-through" : "none")};
 `;
 
-const ListItem = ({ task, index, handleChangeTaskStatus }) => {
+const ListItem = ({ task, index, handleChangeTaskStatus, deleteTask }) => {
 	return (
 		<StyledListItem>
 			<Paragraph isDone={task.done}>{task.title}</Paragraph>
 			<ActionsWrapper>
 				<IconWrapper>
-					<BiTrash />
+					<BiTrash onClick={() => deleteTask(task.id)} />
 				</IconWrapper>
 				<input
 					type="checkbox"
