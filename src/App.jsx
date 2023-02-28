@@ -13,16 +13,10 @@ function App() {
 		{ id: 2, title: "Fake task from state", done: true },
 	]);
 
-	// const changeTaskStatus = (id) => {
-	// 	setTasks((currentTasks) => {
-	// 		return currentTasks.map((task) => {
-	// 			if (task.id === id) {
-	// 				return { ...task, done: !task.done };
-	// 			}
-	// 			return;
-	// 		});
-	// 	});
-	// };
+	const changeTaskStatus = (index) => {
+		tasks[index].done = !tasks[index].done;
+		setTasks([...tasks]);
+	};
 
 	return (
 		<>
@@ -35,7 +29,7 @@ function App() {
 				<form>
 					<Input type="text" placeholder="+ Add your new task..." />
 				</form>
-				<List list={tasks} />
+				<List tasks={tasks} changeTaskStatus={changeTaskStatus} />
 			</Wrapper>
 		</>
 	);

@@ -1,10 +1,15 @@
 import ListItem from "../ListItem";
 import { StyledList } from "./List.styles";
 
-const List = ({ list }) => {
+const List = ({ tasks, changeTaskStatus }) => {
 	const renderTasksList = () =>
-		list.map(({ id, title, done }) => (
-			<ListItem key={id} title={title} isDone={done} />
+		tasks.map((task, index) => (
+			<ListItem
+				key={crypto.randomUUID()}
+				task={task}
+				index={index}
+				handleChangeTaskStatus={changeTaskStatus}
+			/>
 		));
 	return <StyledList>{renderTasksList()}</StyledList>;
 };
