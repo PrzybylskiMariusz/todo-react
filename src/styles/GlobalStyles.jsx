@@ -14,10 +14,10 @@ export const GlobalStyles = createGlobalStyle`
         box-sizing: inherit;
         margin: 0;
         padding: 0;
+        font-family: "Mulish", sans-serif;
     }
 
     body {
-        font-family: "Mulish", sans-serif;
         font-size: 1.6rem;
         font-weight: 400;
         display: flex;
@@ -25,7 +25,7 @@ export const GlobalStyles = createGlobalStyle`
         justify-content: center;
         height: 100vh;
         width: 100%;
-        color: #101010;
-        background-color: #F9F9F9;
+        color: ${({ theme }) => theme.black};
+        background-color: ${({ theme }) => theme.bg};
     }
 `;

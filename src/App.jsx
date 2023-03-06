@@ -1,6 +1,8 @@
 import { GlobalStyles } from "./styles/GlobalStyles";
 import { getDate } from "./utils/helpers";
 import { useState } from "react";
+import { ThemeProvider } from "styled-components";
+import { theme } from "./styles/theme";
 import Wrapper from "./components/Wrapper";
 import Heading from "./components/Heading";
 import DateParagraph from "./components/DateParagraph";
@@ -49,30 +51,32 @@ function App() {
 	};
 
 	return (
-		<>
-			<GlobalStyles />
-			<Wrapper>
-				<header>
-					<Heading title="My tasks" />
-					<DateParagraph currentDate={getDate()} />
-				</header>
-				<form onSubmit={handleSubmit}>
-					<Input
-						type="text"
-						placeholder="+ Add your new task..."
-						value={formValue.title}
-						onChange={(e) =>
-							setFormValue({ ...formValue, title: e.target.value })
-						}
+		<ThemeProvider theme={theme}>
+			<>
+				<GlobalStyles />
+				<Wrapper>
+					<header>
+						<Heading title="My tasks" />
+						<DateParagraph currentDate={getDate()} />
+					</header>
+					<form onSubmit={handleSubmit}>
+						<Input
+							type="text"
+							placeholder="+ Add your new task..."
+							value={formValue.title}
+							onChange={(e) =>
+								setFormValue({ ...formValue, title: e.target.value })
+							}
+						/>
+					</form>
+					<List
+						tasks={tasks}
+						changeTaskStatus={changeTaskStatus}
+						deleteTask={deleteTask}
 					/>
-				</form>
-				<List
-					tasks={tasks}
-					changeTaskStatus={changeTaskStatus}
-					deleteTask={deleteTask}
-				/>
-			</Wrapper>
-		</>
+				</Wrapper>
+			</>
+		</ThemeProvider>
 	);
 }
 
