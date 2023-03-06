@@ -13,9 +13,18 @@ function App() {
 		{ id: 2, title: "Fake task from state", done: true },
 	]);
 
-	const changeTaskStatus = (index) => {
-		tasks[index].done = !tasks[index].done;
-		setTasks([...tasks]);
+	const changeTaskStatus = (id) => {
+		setTasks((prevTasks) => {
+			return prevTasks.map((task) => {
+				if (id === task.id) {
+					return {
+						...task,
+						done: !task.done,
+					};
+				}
+				return task;
+			});
+		});
 	};
 
 	const addTask = (task) => {
@@ -49,7 +58,6 @@ function App() {
 				</header>
 				<form onSubmit={handleSubmit}>
 					<Input
-						id="test"
 						type="text"
 						placeholder="+ Add your new task..."
 						value={formValue.title}

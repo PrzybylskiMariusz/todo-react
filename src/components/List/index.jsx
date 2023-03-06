@@ -7,7 +7,6 @@ const List = ({ tasks, changeTaskStatus, deleteTask }) => {
 			<ListItem
 				key={crypto.randomUUID()}
 				task={task}
-				index={index}
 				handleChangeTaskStatus={changeTaskStatus}
 				deleteTask={deleteTask}
 			/>
