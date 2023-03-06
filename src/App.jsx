@@ -38,16 +38,14 @@ function App() {
 		setTasks([...filteredTasks]);
 	};
 
-	const [formValue, setFormValue] = useState({
-		id: crypto.randomUUID(),
-		title: "",
-		done: false,
-	});
+	const defaultFormValue = { id: crypto.randomUUID(), title: "", done: false };
+
+	const [formValue, setFormValue] = useState(defaultFormValue);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		addTask(formValue);
-		setFormValue({ id: crypto.randomUUID(), title: "", done: false });
+		setFormValue(defaultFormValue);
 	};
 
 	return (
