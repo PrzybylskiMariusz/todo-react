@@ -48,6 +48,10 @@ function App() {
 		setFormValue(defaultFormValue);
 	};
 
+	const hanldeFormChange = (e) => {
+		setFormValue({ ...formValue, title: e.target.value });
+	};
+
 	return (
 		<ThemeProvider theme={theme}>
 			<>
@@ -62,9 +66,7 @@ function App() {
 							type="text"
 							placeholder="+ Add your new task..."
 							value={formValue.title}
-							onChange={(e) =>
-								setFormValue({ ...formValue, title: e.target.value })
-							}
+							onChange={hanldeFormChange}
 						/>
 					</form>
 					<List
