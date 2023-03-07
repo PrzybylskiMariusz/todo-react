@@ -1,6 +1,6 @@
 import { GlobalStyles } from "./styles/GlobalStyles";
 import { getDate } from "./utils/helpers";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./styles/theme";
 import Wrapper from "./components/Wrapper";
@@ -48,9 +48,12 @@ function App() {
 		setFormValue(defaultFormValue);
 	};
 
-	const hanldeFormChange = (e) => {
-		setFormValue({ ...formValue, title: e.target.value });
-	};
+	const hanldeFormChange = useCallback(
+		(e) => {
+			setFormValue({ ...formValue, title: e.target.value });
+		},
+		[formValue]
+	);
 
 	return (
 		<ThemeProvider theme={theme}>
