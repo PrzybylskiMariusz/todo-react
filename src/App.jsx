@@ -4,8 +4,7 @@ import { useState, useCallback } from "react";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./styles/theme";
 import Wrapper from "./components/Wrapper";
-import Heading from "./components/Heading";
-import DateParagraph from "./components/DateParagraph";
+import Header from "./components/Header";
 import Input from "./components/Input";
 import List from "./components/List";
 
@@ -60,10 +59,7 @@ function App() {
 			<>
 				<GlobalStyles />
 				<Wrapper>
-					<header>
-						<Heading title="My tasks" />
-						<DateParagraph currentDate={getDate()} />
-					</header>
+					<Header title="My tasks" currentDate={getDate()} />
 					<form onSubmit={handleSubmit}>
 						<Input
 							type="text"
