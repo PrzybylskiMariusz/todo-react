@@ -18,8 +18,18 @@ const IconWrapper = styled.div`
 	cursor: pointer;
 `;
 
-const Paragraph = styled.p`
+const TaskTitle = styled.input`
 	text-decoration: ${({ isDone }) => (isDone ? "line-through" : "none")};
+	width: 70%;
+	padding: 0.8rem;
+	border: none;
+	background-color: none;
+	border-radius: 0.4rem;
+
+	&:focus {
+		outline: none;
+		background-color: ${({ theme }) => theme.bg};
+	}
 `;
 
 const Checkbox = styled.input`
@@ -45,7 +55,7 @@ const CustomBiTrash = styled(BiTrash)`
 
 const ListItem = styled.li`
 	background-color: white;
-	padding: 2.4rem 3.2rem;
+	padding: 2.4rem 3.2rem 2.4rem 2.4rem;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -55,7 +65,7 @@ const ListItem = styled.li`
 
 export const Styled = {
 	ActionsWrapper,
-	Paragraph,
+	TaskTitle,
 	Checkbox,
 	CustomBiTrash,
 	ListItem,

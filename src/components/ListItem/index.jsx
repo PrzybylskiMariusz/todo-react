@@ -1,9 +1,19 @@
 import { Styled } from "./ListItem.styles";
 
-const ListItem = ({ task, handleChangeTaskStatus, deleteTask }) => {
+const ListItem = ({
+	task,
+	handleEditTaskTitle,
+	handleChangeTaskStatus,
+	deleteTask,
+}) => {
 	return (
 		<Styled.ListItem>
-			<Styled.Paragraph isDone={task.done}>{task.title}</Styled.Paragraph>
+			<Styled.TaskTitle
+				onChange={(e) => handleEditTaskTitle(e.currentTarget.value, task.id)}
+				isDone={task.done}
+				value={task.title}
+				type="text"
+			/>
 			<Styled.ActionsWrapper>
 				<Styled.IconWrapper>
 					<Styled.CustomBiTrash onClick={() => deleteTask(task.id)} />

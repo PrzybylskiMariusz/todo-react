@@ -28,6 +28,14 @@ function App() {
 		});
 	};
 
+	const handleEditTaskTitle = (newTitleValue, id) => {
+		setTasks((prevTasks) =>
+			prevTasks.map((task) =>
+				task.id === id ? { ...task, title: newTitleValue } : task
+			)
+		);
+	};
+
 	const addTask = (task) => {
 		setTasks([task, ...tasks]);
 	};
@@ -71,6 +79,7 @@ function App() {
 					<List
 						tasks={tasks}
 						changeTaskStatus={changeTaskStatus}
+						handleEditTaskTitle={handleEditTaskTitle}
 						deleteTask={deleteTask}
 					/>
 				</Wrapper>
