@@ -1,52 +1,60 @@
-import { StyledListItem } from "./ListItem.styles";
-import { BiTrash } from "react-icons/bi";
-import checkIcon from "../../assets/todo.svg";
-import styled from "styled-components";
-import ActionsWrapper from "../ActionsWrapper";
-import IconWrapper from "../IconWrapper";
+import { Styled } from "./ListItem.styles";
+import { useState } from "react";
 
-const Paragraph = styled.p`
-	text-decoration: ${({ isDone }) => (isDone ? "line-through" : "none")};
-`;
+const ListItem = ({
+	task,
+	handleEditTaskTitle,
+	handleChangeTaskStatus,
+	deleteTask,
+}) => {
+	const [editing, setEditing] = useState(false);
 
-const StyledCheckbox = styled.input`
-	appearance: none;
-	width: 2.4rem;
-	height: 2.4rem;
-	border: 1px solid ${({ theme }) => theme.grey};
-	border-radius: 50%;
-	cursor: pointer;
+	const handleEditing = () => {
+		setEditing((prevEditing) => !prevEditing);
+	};
 
-	&:checked {
-		background-image: url(${checkIcon});
-		background-size: 120%;
-		background-position: center;
-		border: none;
+	let viewMode = {};
+	let editMode = {};
+	if (editing) {
+		viewMode.display = "none";
+	} else {
+		editMode.display = "none";
 	}
-`;
 
-const StyledBiTrash = styled(BiTrash)`
-	width: 2.2rem;
-	height: 2.2rem;
-`;
+	const handleUpdatedDone = (event) => {
+		if (event.key === "Enter") {
+			setEditing(false);
+		}
+	};
 
-const ListItem = ({ task, handleChangeTaskStatus, deleteTask }) => {
 	return (
-		<StyledListItem>
-			<Paragraph isDone={task.done}>{task.title}</Paragraph>
-			<ActionsWrapper>
-				<IconWrapper>
-					<StyledBiTrash onClick={() => deleteTask(task.id)} />
-				</IconWrapper>
-				<IconWrapper>
-					<StyledCheckbox
+		<Styled.ListItem>
+			<Styled.TaskTitle isDone={task.done} style={viewMode}>
+				{task.title}
+			</Styled.TaskTitle>
+			<Styled.EditingTaskTitle
+				onChange={(e) => handleEditTaskTitle(e.currentTarget.value, task.id)}
+				value={task.title}
+				type="text"
+				style={editMode}
+				onKeyDown={handleUpdatedDone}
+			/>
+			<Styled.ActionsWrapper>
+				<Styled.IconWrapper>
+					<Styled.CustomBiTrash onClick={() => deleteTask(task.id)} />
+				</Styled.IconWrapper>
+				<Styled.IconWrapper>
+					<Styled.CustomBiEdit onClick={handleEditing} />
+				</Styled.IconWrapper>
+				<Styled.IconWrapper>
+					<Styled.Checkbox
 						type="checkbox"
 						defaultChecked={task.done}
 						onChange={() => handleChangeTaskStatus(task.id)}
 					/>
-				</IconWrapper>
-			</ActionsWrapper>
-		</StyledListItem>
+				</Styled.IconWrapper>
+			</Styled.ActionsWrapper>
+		</Styled.ListItem>
 	);
 };
 
