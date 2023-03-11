@@ -8,6 +8,7 @@ const ListItem = ({
 	deleteTask,
 }) => {
 	const [editing, setEditing] = useState(false);
+	const [inputText, setInputText] = useState(task.title);
 
 	const handleEditing = () => {
 		setEditing((prevEditing) => !prevEditing);
@@ -21,10 +22,9 @@ const ListItem = ({
 		editMode.display = "none";
 	}
 
-	const handleUpdatedDone = (event) => {
-		if (event.key === "Enter") {
-			setEditing(false);
-		}
+	const onTaskUpdate = (e) => {
+		let text = e.target.value;
+		setInputText(text);
 	};
 
 	return (
@@ -33,26 +33,34 @@ const ListItem = ({
 				{task.title}
 			</Styled.TaskTitle>
 			<Styled.EditingTaskTitle
-				onChange={(e) => handleEditTaskTitle(e.currentTarget.value, task.id)}
-				value={task.title}
+				onChange={(e) => onTaskUpdate(e)}
+				value={inputText}
 				type="text"
 				style={editMode}
-				onKeyDown={handleUpdatedDone}
 			/>
 			<Styled.ActionsWrapper>
-				<Styled.IconWrapper>
-					<Styled.CustomBiTrash onClick={() => deleteTask(task.id)} />
-				</Styled.IconWrapper>
-				<Styled.IconWrapper>
-					<Styled.CustomBiEdit onClick={handleEditing} />
-				</Styled.IconWrapper>
-				<Styled.IconWrapper>
-					<Styled.Checkbox
-						type="checkbox"
-						defaultChecked={task.done}
-						onChange={() => handleChangeTaskStatus(task.id)}
-					/>
-				</Styled.IconWrapper>
+				{!editing ? (
+					<>
+						<Styled.IconWrapper>
+							<Styled.CustomBiTrash onClick={() => deleteTask(task.id)} />
+						</Styled.IconWrapper>
+						<Styled.IconWrapper>
+							<Styled.CustomBiEdit onClick={handleEditing} />
+						</Styled.IconWrapper>
+						<Styled.IconWrapper>
+							<Styled.Checkbox
+								type="checkbox"
+								defaultChecked={task.done}
+								onChange={() => handleChangeTaskStatus(task.id)}
+							/>
+						</Styled.IconWrapper>
+					</>
+				) : (
+					<Styled.Button
+						onClick={() => handleEditTaskTitle(inputText, task.id)}>
+						Save
+					</Styled.Button>
+				)}
 			</Styled.ActionsWrapper>
 		</Styled.ListItem>
 	);

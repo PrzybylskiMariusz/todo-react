@@ -24,8 +24,10 @@ const TaskTitle = styled.p`
 `;
 
 const EditingTaskTitle = styled.input`
+	display: block;
 	width: 70%;
-	padding: 0.8rem;
+	height: 3.6rem;
+	padding: 0 0.8rem;
 	border: none;
 	background-color: ${({ theme }) => theme.bg};
 	border-radius: 0.4rem;
@@ -72,6 +74,24 @@ const ListItem = styled.li`
 	box-shadow: 0px 0px 10px -2px rgba(8, 96, 251, 0.12);
 `;
 
+const Button = styled.button`
+	height: 3.2rem;
+	padding: 0 2.4rem;
+	text-transform: uppercase;
+	font-size: 1.2rem;
+	background-color: white;
+	border: 1px solid ${({ theme }) => theme.blue};
+	border-radius: 50px;
+	color: ${({ theme }) => theme.blue};
+	font-weight: 600;
+	cursor: pointer;
+
+	&:hover {
+		background-color: ${({ theme }) => theme.blue};
+		color: white;
+	}
+`;
+
 export const Styled = {
 	ActionsWrapper,
 	TaskTitle,
@@ -81,4 +101,5 @@ export const Styled = {
 	CustomBiEdit,
 	ListItem,
 	IconWrapper,
+	Button,
 };
