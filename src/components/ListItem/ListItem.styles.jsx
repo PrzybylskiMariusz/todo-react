@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BiTrash } from "react-icons/bi";
+import { BiTrash, BiEdit } from "react-icons/bi";
 import checkIcon from "../../assets/todo.svg";
 
 const ActionsWrapper = styled.div`
@@ -14,21 +14,24 @@ const IconWrapper = styled.div`
 	justify-content: center;
 	width: 3.2rem;
 	height: 3.2rem;
-	color: red;
 	cursor: pointer;
 `;
 
-const TaskTitle = styled.input`
+const TaskTitle = styled.p`
 	text-decoration: ${({ isDone }) => (isDone ? "line-through" : "none")};
 	width: 70%;
 	padding: 0.8rem;
+`;
+
+const EditingTaskTitle = styled.input`
+	width: 70%;
+	padding: 0.8rem;
 	border: none;
-	background-color: none;
+	background-color: ${({ theme }) => theme.bg};
 	border-radius: 0.4rem;
 
 	&:focus {
 		outline: none;
-		background-color: ${({ theme }) => theme.bg};
 	}
 `;
 
@@ -51,6 +54,12 @@ const Checkbox = styled.input`
 const CustomBiTrash = styled(BiTrash)`
 	width: 2.2rem;
 	height: 2.2rem;
+	color: red;
+`;
+
+const CustomBiEdit = styled(BiEdit)`
+	width: 2.2rem;
+	height: 2.2rem;
 `;
 
 const ListItem = styled.li`
@@ -66,8 +75,10 @@ const ListItem = styled.li`
 export const Styled = {
 	ActionsWrapper,
 	TaskTitle,
+	EditingTaskTitle,
 	Checkbox,
 	CustomBiTrash,
+	CustomBiEdit,
 	ListItem,
 	IconWrapper,
 };

@@ -30,9 +30,12 @@ function App() {
 
 	const handleEditTaskTitle = (newTitleValue, id) => {
 		setTasks((prevTasks) =>
-			prevTasks.map((task) =>
-				task.id === id ? { ...task, title: newTitleValue } : task
-			)
+			prevTasks.map((task) => {
+				if (task.id === id) {
+					task.title = newTitleValue;
+				}
+				return task;
+			})
 		);
 	};
 
