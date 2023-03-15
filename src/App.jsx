@@ -3,17 +3,16 @@ import { getDate } from "./utils/helpers";
 import { useState, useCallback } from "react";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./styles/theme";
+import { EmptyTasks } from "./components/EmptyTasks";
 import Wrapper from "./components/Wrapper";
-import Heading from "./components/Heading";
-import DateParagraph from "./components/DateParagraph";
+import Header from "./components/Header";
 import Input from "./components/Input";
 import List from "./components/List";
 
 function App() {
-	const [tasks, setTasks] = useState([
-		{ id: 1, title: "Fake task from state", done: false },
-		{ id: 2, title: "Fake task from state", done: true },
-	]);
+	const [tasks, setTasks] = useState([]);
+
+	const isEmpty = tasks.length === 0;
 
 	const changeTaskStatus = (id) => {
 		setTasks((prevTasks) => {
@@ -27,6 +26,17 @@ function App() {
 				return task;
 			});
 		});
+	};
+
+	const handleEditTaskTitle = (newTitleValue, id) => {
+		setTasks((prevTasks) =>
+			prevTasks.map((task) => {
+				if (task.id === id) {
+					task.title = newTitleValue;
+				}
+				return task;
+			})
+		);
 	};
 
 	const addTask = (task) => {
@@ -60,10 +70,7 @@ function App() {
 			<>
 				<GlobalStyles />
 				<Wrapper>
-					<header>
-						<Heading title="My tasks" />
-						<DateParagraph currentDate={getDate()} />
-					</header>
+					<Header title="My tasks" currentDate={getDate()} />
 					<form onSubmit={handleSubmit}>
 						<Input
 							type="text"
@@ -72,11 +79,16 @@ function App() {
 							onChange={hanldeFormChange}
 						/>
 					</form>
-					<List
-						tasks={tasks}
-						changeTaskStatus={changeTaskStatus}
-						deleteTask={deleteTask}
-					/>
+					{isEmpty ? (
+						<EmptyTasks />
+					) : (
+						<List
+							tasks={tasks}
+							changeTaskStatus={changeTaskStatus}
+							handleEditTaskTitle={handleEditTaskTitle}
+							deleteTask={deleteTask}
+						/>
+					)}
 				</Wrapper>
 			</>
 		</ThemeProvider>
